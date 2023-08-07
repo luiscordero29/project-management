@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('milestones', function (Blueprint $table) {
-            $table->uuid('milestone_id')->primary();
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->uuid('task_id')->primary();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->date('star');
             $table->date('due');
             $table->boolean('completed')->default(false);
-            $table->uuid('project_id');
-            $table->foreign('project_id')->references('project_id')->on('projects')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->uuid('taskslist_id');
+            $table->foreign('taskslist_id')->references('taskslist_id')->on('taskslists')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,9 +29,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('milestones', function (Blueprint $table) {
-            $table->dropForeign(['project_id']);
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropForeign(['taskslist_id']);
         });
-        Schema::dropIfExists('milestones');
+        Schema::dropIfExists('tasks');
     }
 };

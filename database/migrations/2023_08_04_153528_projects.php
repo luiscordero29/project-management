@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('finish')->nullable();
             $table->boolean('never_finished')->default(false);
             $table->double('cost', 8, 2)->default(false);
+            $table->boolean('completed')->default(false);
             $table->uuid('client_id')->nullable();
             $table->foreign('client_id')->references('user_id')->on('users')->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
